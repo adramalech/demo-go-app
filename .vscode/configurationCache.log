@@ -1,1 +1,0 @@
-{"buildTargets":["docker-build","docker-deploy","docker-login","docker-publish","docker-pull","docker-push","docker-run","docker-tag"],"launchTargets":[],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}
