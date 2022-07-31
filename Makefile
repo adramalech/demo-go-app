@@ -21,5 +21,3 @@ docker-run:
 docker-publish: docker-login docker-build docker-tag docker-push
 
 docker-deploy: docker-login docker-pull docker-run
-	
-	

@@ -1,31 +1,30 @@
 package main
 
 import (
-    "fmt"
-    "net/http"
+	"net/http"
+
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
+func helloWorldHandler(c echo.Context) error {
+	return c.String(http.StatusOK, "Hello World")
+}
+
+func pingHandler(c echo.Context) error {
+	return c.String(http.StatusOK, "Pong!")
+}
+
 func main() {
-    mux := http.NewServeMux()
+	e := echo.New()
 
-    mux.HandleFunc("/", func (w http.ResponseWriter, r *http.Request) {
+	// Middleware
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
 
-        // route will default to / if it doesn't match using net/http default servemux
-        // have to make sure to check the / handler if it doesn't match throw a 404 back!
-        if r.URL.Path != "/" {
-            w.WriteHeader(http.StatusNotFound)
-            fmt.Fprintf(w, "%s route not found!", r.URL.Path)
-            return
-        }
+	e.GET("/", helloWorldHandler)
 
-        fmt.Fprintf(w, "Hello World!")
-    })
+	e.GET("/ping", pingHandler)
 
-    mux.HandleFunc("/ping", func (w http.ResponseWriter, r *http.Request) {
-        fmt.Fprintf(w, "pong!")
-    })
-
-    fmt.Println("listing on :3000....")
-
-    http.ListenAndServe(":3000", mux)
+	e.Logger.Fatal(e.Start((":3000")))
 }

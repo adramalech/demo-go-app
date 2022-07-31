@@ -1,6 +1,6 @@
 # Dockerfile References:  https://docs.docker.com/engine/reference/builder/
 
-FROM golang:1.15-alpine3.12
+FROM golang:1.18-alpine3.16
 
 LABEL maintainer="Jonathan Throne <adramalech707@gmail.com>"
 
